@@ -1,415 +1,247 @@
-<p align="center">
-  <img src="public/logo.png" alt="ZED Logo" width="150" />
-</p>
+# Template ZED - Next.js 15 + Supabase Auth
 
-<h1 align="center">ZED - Assistente Virtual Inteligente</h1>
+Um template limpo e funcional com autenticação completa, design system moderno e estrutura pronta para desenvolvimento.
 
-<p align="center">
-  <strong>Seu assistente pessoal com IA para organizar sua vida</strong>
-</p>
+## Stack
 
-<p align="center">
-  <a href="#-sobre-o-projeto">Sobre</a> •
-  <a href="#-funcionalidades">Funcionalidades</a> •
-  <a href="#-tecnologias">Tecnologias</a> •
-  <a href="#-instalação">Instalação</a> •
-  <a href="#-estrutura">Estrutura</a> •
-  <a href="#-licença">Licença</a>
-</p>
+- **Framework**: Next.js 15 (App Router com Turbopack)
+- **Auth**: Supabase Auth (@supabase/ssr)
+- **Banco de Dados**: Supabase (PostgreSQL)
+- **UI**: Tailwind CSS 4 + Framer Motion
+- **Toast**: react-hot-toast
+- **Ícones**: Lucide React
+- **Background Animado**: thpace
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Next.js-15-000000?style=for-the-badge&logo=next.js" alt="Next.js" />
-  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react" alt="React" />
-  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/TailwindCSS-4-06B6D4?style=for-the-badge&logo=tailwindcss" alt="TailwindCSS" />
-  <img src="https://img.shields.io/badge/Supabase-Database-3FCF8E?style=for-the-badge&logo=supabase" alt="Supabase" />
-</p>
+## Funcionalidades do Template
 
----
+### ✅ Autenticação Completa
+- Login com email/senha
+- Cadastro de novos usuários
+- Recuperação de senha
+- Redefinição de senha
+- Exclusão de conta
+- Proteção de rotas via middleware
 
-## 📖 Sobre o Projeto
+### ✅ Design System
+- Tema dark moderno com gradientes e efeitos glass
+- Componentes reutilizáveis (Button, Input, Card, Avatar, etc.)
+- Layout responsivo (Mobile-first)
+- Sidebar colapsável
+- Header com busca e notificações
+- Bottom Navigation para mobile
 
-**ZED** é um assistente virtual pessoal inspirado no JARVIS, projetado para ser seu "dashboard de vida". Ele centraliza todas as suas necessidades de organização pessoal em uma única plataforma inteligente, combinando chat com IA, gerenciamento de tarefas, controle financeiro, agenda e muito mais.
+### ✅ Estrutura de Projeto
+- Arquitetura organizada com atomic design
+- Hooks reutilizáveis
+- Tipagem TypeScript completa
+- Configuração de PWA
 
-### 🎯 Visão
+## Começando
 
-Criar um hub pessoal onde você pode:
-- Conversar naturalmente com uma IA que entende seu contexto
-- Organizar tarefas apenas falando ou digitando
-- Controlar finanças de forma simples e visual
-- Manter uma agenda integrada com lembretes inteligentes
-- Refletir sobre seu dia com um diário guiado
-- Acompanhar metas e hábitos de longo prazo
-
----
-
-## ✨ Funcionalidades
-
-### 💬 Chat Inteligente com ZED
-
-O ZED é seu assistente pessoal que **realmente executa ações**:
-
-```
-Você: "Cria uma tarefa para pagar a conta de luz amanhã"
-ZED: "✅ Criei um lembrete para pagar a conta de luz amanhã!"
-→ A tarefa é salva automaticamente no banco de dados
-```
-
-**Comandos suportados:**
-- 📋 **Criar tarefas**: "Lembre-me de...", "Adiciona tarefa..."
-- 📅 **Agendar eventos**: "Agenda reunião...", "Marca compromisso..."
-- 💰 **Registrar gastos**: "Gastei X reais em...", "Registra despesa..."
-- 🎯 **Criar metas**: "Quero criar uma meta de..."
-
-### 📋 Gerenciador de Rotina (Kanban)
-
-Sistema completo de gerenciamento de tarefas:
-
-| Recurso | Descrição |
-|---------|-----------|
-| **Kanban** | Organize tarefas em colunas: A Fazer → Fazendo → Concluído |
-| **Prioridades** | Alta, Média, Baixa com cores visuais |
-| **Categorias** | Pessoal, Trabalho, Estudos, Saúde, Casa/Família |
-| **Esforço/Energia** | Defina o nível de esforço e energia necessários |
-| **Filtros** | Filtre por status, categoria ou busca |
-| **Drag & Drop** | Arraste tarefas entre colunas |
-
-### 💰 Controle Financeiro
-
-Gerencie suas finanças de forma visual e intuitiva:
-
-- **Resumo financeiro**: Saldo, receitas e despesas do mês
-- **Gráficos por categoria**: Visualize onde você gasta mais
-- **Histórico de transações**: Lista completa com filtros
-- **Registro rápido**: Adicione transações em segundos
-- **Categorias**: Alimentação, Transporte, Moradia, Lazer, Saúde, etc.
-
-### 📅 Agenda Inteligente
-
-Calendário completo com múltiplas visualizações:
-
-- **Vista mensal**: Calendário tradicional com eventos
-- **Vista semanal**: Agenda detalhada por dia
-- **Vista lista**: Próximos eventos em formato de lista
-- **Tipos de evento**: Reunião, Pessoal, Lembrete, Ligação
-- **Localização**: Adicione onde será o evento
-- **Cores personalizadas**: Identifique eventos visualmente
-
-### 🎯 Metas e Objetivos
-
-Sistema de acompanhamento de metas por prazo:
-
-- **Curto prazo**: Metas para o mês atual
-- **Médio prazo**: Metas para 3-6 meses
-- **Longo prazo**: Metas anuais
-- **Áreas da vida**: Saúde, Financeiro, Estudos, Trabalho, Pessoal
-- **Progresso visual**: Barra de progresso com porcentagem
-- **Milestones**: Divida metas em etapas menores
-
-### ✅ Checklists Inteligentes
-
-Listas reutilizáveis com templates prontos:
-
-- **Templates**: Mercado, Viagem, Prova/Entrega
-- **Itens com checkbox**: Marque o que já foi feito
-- **Progresso**: Veja a porcentagem de conclusão
-- **Duplicar**: Reutilize listas facilmente
-- **Personalizável**: Crie suas próprias listas
-
-### 📔 Diário & Coach
-
-Reflexão diária guiada com insights:
-
-- **Humor do dia**: Excelente, Bom, Neutro, Ruim, Péssimo
-- **O que foi bem**: Registre suas vitórias
-- **O que melhorar**: Identifique áreas de crescimento
-- **Foco para amanhã**: Defina suas prioridades
-- **Streak**: Sequência de dias escrevendo
-- **Insights semanais**: ZED gera reflexões baseadas em seus registros
-
-### ⏱️ Foco & Pomodoro
-
-Timer para produtividade:
-
-- **Pomodoro**: 25 minutos de foco + 5 de pausa
-- **Blocos personalizados**: Configure seu tempo ideal
-- **Histórico**: Veja quantos blocos você completou
-- **Integração com tarefas**: Associe sessões a tarefas específicas
-
-### 👨‍💼 Painel Administrativo
-
-Para gerenciar o sistema (acesso restrito):
-
-- **Gestão de usuários**: Ver, editar, desativar contas
-- **Estatísticas**: Métricas de uso do sistema
-- **Logs de atividade**: Histórico de ações
-- **Configurações do sistema**: Ajustes globais
-
----
-
-## 🛠️ Tecnologias
-
-### Frontend
-| Tecnologia | Uso |
-|------------|-----|
-| **Next.js 15** | Framework React com App Router |
-| **React 19** | Biblioteca de UI |
-| **TypeScript 5** | Tipagem estática |
-| **TailwindCSS 4** | Estilização utility-first |
-| **Framer Motion** | Animações fluidas |
-| **Lucide React** | Ícones modernos |
-
-### Backend & Database
-| Tecnologia | Uso |
-|------------|-----|
-| **Supabase** | Backend-as-a-Service |
-| **PostgreSQL** | Banco de dados relacional |
-| **Row Level Security** | Segurança por usuário |
-| **Supabase Auth** | Autenticação completa |
-
-### IA & APIs
-| Tecnologia | Uso |
-|------------|-----|
-| **Google Gemini** | IA para o chat (gratuito) |
-| **Edge Functions** | Processamento serverless |
-
-### UI Components
-| Tecnologia | Uso |
-|------------|-----|
-| **Magic UI** | Componentes animados |
-| **class-variance-authority** | Variantes de componentes |
-| **clsx + tailwind-merge** | Merge de classes CSS |
-| **react-hot-toast** | Notificações |
-
----
-
-## 🚀 Instalação
-
-### Pré-requisitos
-
-- **Node.js** 18 ou superior
-- **npm** ou **yarn**
-- Conta no [Supabase](https://supabase.com) (gratuito)
-- Chave API do [Google AI Studio](https://makersuite.google.com/app/apikey) (gratuito)
-
-### Passo a Passo
-
-#### 1. Clone o repositório
+### 1. Clonar e Instalar
 
 ```bash
-git clone https://github.com/seu-usuario/zed.git
-cd zed
-```
-
-#### 2. Instale as dependências
-
-```bash
+git clone <repo-url> meu-projeto
+cd meu-projeto
 npm install
 ```
 
-#### 3. Configure as variáveis de ambiente
+### 2. Configurar Supabase
 
-Crie um arquivo `.env` na raiz do projeto:
+1. Crie um projeto no [Supabase](https://supabase.com/dashboard)
+2. Copie o arquivo `.env.example` para `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+3. Preencha com suas credenciais do Supabase:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=https://seu-projeto.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=sua-anon-key
+   SUPABASE_SERVICE_ROLE_KEY=sua-service-role-key
+   ```
 
-```env
-# ====================================
-# SUPABASE
-# Obtenha em: https://supabase.com/dashboard/project/_/settings/api
-# ====================================
-NEXT_PUBLIC_SUPABASE_URL=https://seu-projeto.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sua-anon-key-aqui
-SUPABASE_SERVICE_ROLE_KEY=sua-service-role-key-aqui
+### 3. Configurar Banco de Dados
 
-# ====================================
-# GOOGLE GEMINI (IA do Chat)
-# Obtenha em: https://makersuite.google.com/app/apikey
-# ====================================
-GEMINI_API_KEY=sua-gemini-api-key-aqui
+Execute as migrations no Supabase SQL Editor:
+
+```bash
+# No Supabase Dashboard > SQL Editor
+# Execute o arquivo: supabase/migrations/001_initial_schema.sql
 ```
 
-#### 4. Configure o Supabase
-
-O banco de dados já está configurado se você conectou via MCP. Caso contrário, execute as migrations disponíveis em `supabase/migrations/`.
-
-#### 5. Inicie o servidor
+### 4. Rodar o Projeto
 
 ```bash
 npm run dev
 ```
 
-#### 6. Acesse o projeto
+Acesse [http://localhost:3000](http://localhost:3000)
 
-Abra [http://localhost:3000](http://localhost:3000) no navegador.
-
----
-
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
-ZED/
-├── public/
-│   └── logo.png                 # Logo do ZED
-│
-├── src/
-│   ├── app/
-│   │   ├── (auth)/              # 🔐 Autenticação
-│   │   │   ├── login/           # Página de login
-│   │   │   ├── signup/          # Página de cadastro
-│   │   │   └── layout.tsx       # Layout com background
-│   │   │
-│   │   ├── (dashboard)/         # 📊 Área Logada
-│   │   │   └── dashboard/
-│   │   │       ├── page.tsx     # Dashboard principal
-│   │   │       ├── chat/        # 💬 Chat com ZED
-│   │   │       ├── routine/     # 📋 Kanban de tarefas
-│   │   │       ├── finances/    # 💰 Controle financeiro
-│   │   │       ├── schedule/    # 📅 Agenda
-│   │   │       ├── goals/       # 🎯 Metas
-│   │   │       ├── checklists/  # ✅ Checklists
-│   │   │       ├── journal/     # 📔 Diário
-│   │   │       ├── focus/       # ⏱️ Pomodoro
-│   │   │       └── settings/    # ⚙️ Configurações
-│   │   │
-│   │   ├── (admin)/             # 👨‍💼 Painel Admin
-│   │   │   └── admin/
-│   │   │       ├── page.tsx     # Dashboard admin
-│   │   │       └── users/       # Gestão de usuários
-│   │   │
-│   │   ├── api/                 # 🔌 API Routes
-│   │   │   ├── chat/            # Endpoint do chat (Gemini)
-│   │   │   └── actions/         # Endpoint de ações
-│   │   │
-│   │   ├── layout.tsx           # Layout raiz
-│   │   └── page.tsx             # Landing page
-│   │
-│   └── shared/
-│       ├── components/
-│       │   ├── atoms/           # 🔹 Componentes básicos
-│       │   │   ├── Button.tsx
-│       │   │   ├── Input.tsx
-│       │   │   ├── Badge.tsx
-│       │   │   ├── Avatar.tsx
-│       │   │   ├── Spinner.tsx
-│       │   │   └── ZedLogo.tsx
-│       │   │
-│       │   ├── molecules/       # 🔸 Componentes compostos
-│       │   │   ├── Card.tsx
-│       │   │   └── Modal.tsx
-│       │   │
-│       │   └── organisms/       # 🔶 Componentes complexos
-│       │       ├── Header.tsx
-│       │       ├── Sidebar.tsx
-│       │       └── BackgroundGradient.tsx
-│       │
-│       ├── hooks/               # 🪝 React Hooks
-│       │   ├── useSupabaseAuth.ts
-│       │   ├── useTasks.ts
-│       │   ├── useTransactions.ts
-│       │   ├── useEvents.ts
-│       │   ├── useGoals.ts
-│       │   ├── useChecklists.ts
-│       │   ├── useJournal.ts
-│       │   └── useAdmin.ts
-│       │
-│       ├── lib/
-│       │   ├── utils.ts         # Utilitários (cn, formatters)
-│       │   ├── gemini.ts        # Cliente Google Gemini
-│       │   └── supabase/        # Cliente Supabase
-│       │
-│       └── styles/
-│           └── globals.css      # Estilos globais + Tailwind
-│
-├── .env.local                   # ⚠️ Variáveis de ambiente (não versionar)
-├── package.json
-├── tailwind.config.ts
-├── tsconfig.json
-└── README.md
+src/
+├── app/
+│   ├── (auth)/              # Rotas públicas de autenticação
+│   │   ├── login/
+│   │   ├── signup/
+│   │   ├── forgot-password/
+│   │   └── reset-password/
+│   ├── (dashboard)/         # Rotas protegidas
+│   │   └── dashboard/
+│   │       ├── page.tsx     # Dashboard principal
+│   │       └── settings/    # Configurações
+│   ├── api/                 # API Routes
+│   │   └── account/delete/  # Exclusão de conta
+│   └── layout.tsx           # Layout raiz
+├── shared/
+│   ├── components/
+│   │   ├── atoms/           # Button, Input, Avatar, etc.
+│   │   ├── molecules/       # Card, Modal
+│   │   ├── organisms/       # Header, Sidebar, BottomNav
+│   │   └── ui/              # Componentes especiais
+│   ├── hooks/               # Hooks reutilizáveis
+│   ├── lib/                 # Utilitários e Supabase client
+│   ├── styles/              # CSS global
+│   └── types/               # Tipos TypeScript
+└── public/                  # Assets estáticos
 ```
 
----
+## Criando Novos Módulos
 
-## 🎨 Design System
+### 1. Criar Nova Página
 
-### Cores
+```tsx
+// src/app/(dashboard)/dashboard/meu-modulo/page.tsx
+'use client'
 
-| Nome | Hex | Uso |
-|------|-----|-----|
-| **Azul Principal** | `#3B82F6` | CTAs, links, destaque |
-| **Prata** | `#A1A1AA` | Textos secundários |
-| **Dourado** | `#F59E0B` | Botões premium, badges |
-| **Background** | `#0A101F` | Fundo principal |
-| **Card** | `#111827` | Fundo de cards |
+import React from 'react'
+import { Card, CardHeader, CardTitle, CardContent } from '@/shared/components/molecules/Card'
 
-### Tipografia
+export default function MeuModuloPage() {
+  return (
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Meu Novo Módulo</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {/* Seu conteúdo aqui */}
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+```
 
-- **UI**: Inter (limpa e moderna)
-- **Código**: JetBrains Mono
-- **Tamanhos**: sm (14px), base (16px), lg (18px), xl+ (títulos)
+### 2. Adicionar ao Menu
+
+Edite `src/shared/components/organisms/Sidebar.tsx`:
+
+```tsx
+const menuItems = [
+  {
+    section: 'PRINCIPAL',
+    items: [
+      { title: 'Dashboard', icon: <LayoutDashboard size={iconSize} />, link: '/dashboard', color: 'blue' },
+      { title: 'Meu Módulo', icon: <Star size={iconSize} />, link: '/dashboard/meu-modulo', color: 'purple' },
+    ],
+  },
+  // ...
+]
+```
+
+### 3. Criar Hook (opcional)
+
+```tsx
+// src/shared/hooks/useMeuModulo.ts
+'use client';
+
+import { useState, useCallback } from 'react';
+import { createClient } from '@/shared/lib/supabase/client';
+
+export const useMeuModulo = () => {
+  const [dados, setDados] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const supabase = createClient();
+
+  // Suas funções aqui...
+
+  return {
+    dados,
+    isLoading,
+    // ...
+  };
+};
+```
+
+## Variáveis de Ambiente
+
+| Variável | Descrição |
+|----------|-----------|
+| `NEXT_PUBLIC_SUPABASE_URL` | URL do seu projeto Supabase |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Chave anônima do Supabase |
+| `SUPABASE_SERVICE_ROLE_KEY` | Chave de serviço (apenas para APIs server-side) |
+| `NEXT_PUBLIC_SITE_URL` | URL do site (para redirecionamentos de auth) |
+
+## Segurança
+
+### Middleware de Autenticação
+
+O arquivo `middleware.ts` protege automaticamente as rotas:
+
+- Rotas públicas: `/`, `/login`, `/signup`, `/forgot-password`, `/reset-password`
+- Rotas protegidas: `/dashboard/*`
+
+### Row Level Security (RLS)
+
+Configure RLS no Supabase para suas tabelas:
+
+```sql
+-- Exemplo: Usuários só veem seus próprios dados
+CREATE POLICY "Users can view own data" ON sua_tabela
+  FOR SELECT USING (auth.uid() = user_id);
+```
+
+## Comandos Úteis
+
+```bash
+# Desenvolvimento
+npm run dev
+
+# Build de produção
+npm run build
+
+# Iniciar produção
+npm start
+
+# Lint
+npm run lint
+```
+
+## Customização do Visual
+
+### Cores e Tema
+
+Edite `src/shared/styles/globals.css`:
+
+```css
+@theme {
+  /* Suas cores customizadas */
+  --color-primary: oklch(0.55 0.20 250);
+  --color-accent: oklch(0.72 0.18 85);
+}
+```
 
 ### Componentes
 
-Todos os componentes seguem o padrão **Atomic Design**:
+Todos os componentes estão em `src/shared/components/` e podem ser customizados:
 
-- **Atoms**: Button, Input, Badge, Avatar, Spinner
-- **Molecules**: Card, Modal
-- **Organisms**: Header, Sidebar, BackgroundGradient
+- **atoms**: Componentes básicos (Button, Input, etc.)
+- **molecules**: Composições simples (Card, Modal)
+- **organisms**: Composições complexas (Header, Sidebar)
 
----
+## Licença
 
-## 📱 Responsividade
-
-O ZED é totalmente responsivo:
-
-| Dispositivo | Comportamento |
-|-------------|---------------|
-| **Mobile** (< 768px) | Menu inferior, cards em coluna única |
-| **Tablet** (768px - 1024px) | Sidebar lateral, grid 2 colunas |
-| **Desktop** (> 1024px) | Layout completo com sidebar fixa |
-
----
-
-## 🔐 Segurança
-
-- **Row Level Security (RLS)**: Cada usuário só vê seus próprios dados
-- **Autenticação Supabase**: Login seguro com email/senha
-- **Service Role Key**: Usada apenas no servidor para ações do chat
-- **Validação de inputs**: Todos os formulários são validados
-
----
-
-## 🚧 Roadmap
-
-- [ ] Integração com Google Calendar
-- [ ] Notificações push
-- [ ] App mobile (React Native)
-- [ ] Reconhecimento de voz
-- [ ] OCR para escanear recibos
-- [ ] Relatórios exportáveis (PDF)
-- [ ] Temas personalizáveis
-- [ ] Integração com WhatsApp
-
----
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! 
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
----
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
-<p align="center">
-  <strong>Feito com 💙 pela equipe ZED</strong>
-  <br />
-  © 2025 ZED. Todos os direitos reservados.
-</p>
+MIT
+# DASHBOARD-MODULAR-LOADING
