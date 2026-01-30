@@ -6,16 +6,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard,
-  MessageSquare,
-  Calendar,
-  Wallet,
-  ListTodo,
   Settings,
   LogOut,
-  Timer,
-  CheckSquare,
-  BookOpen,
-  Target,
 } from 'lucide-react';
 import { useSupabaseAuth } from '@/shared/hooks/useSupabaseAuth';
 import { SidebarProps } from '@/shared/types';
@@ -215,24 +207,6 @@ export const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
       section: 'PRINCIPAL',
       items: [
         { title: 'Dashboard', icon: <LayoutDashboard size={iconSize} />, link: '/dashboard', color: 'blue' },
-        { title: 'Chat com Zed', icon: <MessageSquare size={iconSize} />, link: '/dashboard/chat', color: 'purple' },
-      ],
-    },
-    {
-      section: 'ORGANIZAÇÃO',
-      items: [
-        { title: 'Rotina', icon: <ListTodo size={iconSize} />, link: '/dashboard/routine', color: 'emerald' },
-        { title: 'Financeiro', icon: <Wallet size={iconSize} />, link: '/dashboard/finances', color: 'amber' },
-        { title: 'Agenda', icon: <Calendar size={iconSize} />, link: '/dashboard/schedule', color: 'indigo' },
-        { title: 'Metas', icon: <Target size={iconSize} />, link: '/dashboard/goals', color: 'violet' },
-      ],
-    },
-    {
-      section: 'PRODUTIVIDADE',
-      items: [
-        { title: 'Timer de Foco', icon: <Timer size={iconSize} />, link: '/dashboard/focus', color: 'blue' },
-        { title: 'Checklists', icon: <CheckSquare size={iconSize} />, link: '/dashboard/checklists', color: 'orange' },
-        { title: 'Diário', icon: <BookOpen size={iconSize} />, link: '/dashboard/journal', color: 'pink' },
       ],
     },
     {

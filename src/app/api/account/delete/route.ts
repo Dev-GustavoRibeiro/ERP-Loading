@@ -2,17 +2,23 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { createClient as createServerClient } from '@/shared/lib/supabase/server';
 
-// Cliente Supabase com service role para operações administrativas
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false
-    }
+// Função para criar cliente admin (lazy loading para evitar erro na build)
+function getSupabaseAdmin() {
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    throw new Error('Missing Supabase environment variables');
   }
-);
+  
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    }
+  );
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -49,6 +55,9 @@ export async function POST(request: NextRequest) {
     // Excluir dados relacionados do usuário (em cascata, se configurado)
     // Nota: Se você tiver triggers ON DELETE CASCADE no banco, isso não é necessário
     // Mas vamos fazer explicitamente para garantir
+
+    // Obter cliente admin
+    const supabaseAdmin = getSupabaseAdmin();
 
     try {
       // Excluir avatar do storage se existir

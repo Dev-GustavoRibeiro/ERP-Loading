@@ -84,27 +84,9 @@ export const useSupabaseAuth = () => {
       
       setUser(data.user);
       
-      // Verificar se é admin para redirecionar corretamente
       if (data.user) {
-        const { data: adminUser, error: adminError } = await supabase
-          .from('admin_users')
-          .select('id, role')
-          .eq('user_id', data.user.id)
-          .maybeSingle();
-        
-        // Se houver erro, logar para debug (mas não mostrar ao usuário)
-        if (adminError) {
-          console.error('[Auth] Erro ao verificar admin:', adminError);
-        }
-        
         toast.success('Login realizado com sucesso!');
-        
-        // Verificar se é admin (adminUser não é null e não há erro)
-        if (adminUser && !adminError) {
-          window.location.href = '/admin';
-        } else {
-          window.location.href = '/dashboard';
-        }
+        window.location.href = '/dashboard';
       }
     } catch (error: any) {
       // Não logar no console - erro já tratado acima

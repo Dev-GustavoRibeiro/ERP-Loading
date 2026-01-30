@@ -27,14 +27,6 @@ export default function DashboardLayout({
   // Determinar título da página
   const getPageTitle = () => {
     if (pathname === '/dashboard') return 'Dashboard'
-    if (pathname.includes('/chat')) return 'Chat com Zed'
-    if (pathname.includes('/routine')) return 'Rotina'
-    if (pathname.includes('/finances')) return 'Financeiro'
-    if (pathname.includes('/schedule')) return 'Agenda'
-    if (pathname.includes('/goals')) return 'Metas'
-    if (pathname.includes('/focus')) return 'Timer de Foco'
-    if (pathname.includes('/checklists')) return 'Checklists'
-    if (pathname.includes('/journal')) return 'Diário'
     if (pathname.includes('/settings')) return 'Configurações'
     return 'Dashboard'
   }

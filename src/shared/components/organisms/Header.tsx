@@ -232,10 +232,6 @@ export const Header = ({
 
   const searchOptions: SearchOption[] = [
     { label: 'Dashboard', link: '/dashboard' },
-    { label: 'Chat com Zed', link: '/dashboard/chat' },
-    { label: 'Rotina', link: '/dashboard/routine' },
-    { label: 'Financeiro', link: '/dashboard/finances' },
-    { label: 'Agenda', link: '/dashboard/schedule' },
     { label: 'Configurações', link: '/dashboard/settings' },
   ];
 

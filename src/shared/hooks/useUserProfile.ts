@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { createClient } from '@/shared/lib/supabase/client';
 import toast from 'react-hot-toast';
+import type { SupabaseClient } from '@supabase/supabase-js';
 
 export interface UserProfile {
   id: string;
@@ -21,7 +22,8 @@ export const useUserProfile = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
-  const supabase = createClient();
+  // Usar client sem tipagem estrita para evitar problemas com tipos gerados
+  const supabase = createClient() as unknown as SupabaseClient;
 
   // Carregar perfil do usuário
   const loadProfile = useCallback(async () => {
