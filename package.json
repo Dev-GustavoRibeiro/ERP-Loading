@@ -1,7 +1,7 @@
 {
-  "name": "zed-assistant",
+  "name": "erp-loading",
   "version": "1.0.0",
-  "description": "Zed - Seu Assistente Virtual Inteligente",
+  "description": "ERP Loading - Sistema de Gestão Empresarial",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
+    "@hookform/resolvers": "^5.2.2",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.46.2",
     "class-variance-authority": "^0.7.1",
@@ -20,11 +21,15 @@
     "lucide-react": "^0.460.0",
     "next": "^15.0.3",
     "react": "^19.0.0",
+    "react-day-picker": "^9.13.2",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.71.1",
     "react-hot-toast": "^2.4.1",
     "recharts": "^2.14.1",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^2.5.5",
     "thpace": "^2.0.3",
+    "zod": "^4.3.6",
     "zustand": "^5.0.1"
   },
   "devDependencies": {

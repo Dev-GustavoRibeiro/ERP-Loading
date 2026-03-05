@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
 import { cn } from "@/shared/lib/utils"
 import { Button } from "@/shared/components/atoms/Button"
+import { Portal } from "@/shared/components/atoms/Portal"
 
 interface ModalProps {
   isOpen: boolean
@@ -62,11 +63,12 @@ const Modal: React.FC<ModalProps> = ({
   }, [isOpen])
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Overlay */}
-          <motion.div
+    <Portal>
+      <AnimatePresence>
+        {isOpen && (
+          <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
+            {/* Overlay */}
+            <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -130,16 +132,17 @@ const Modal: React.FC<ModalProps> = ({
             )}
 
             {/* Body */}
-            <div className="p-4 sm:p-6 max-h-[70vh] overflow-y-auto scrollbar-zed">
+            <div className="p-4 sm:p-6 max-h-[70vh] overflow-y-auto scrollbar-none">
               {children}
             </div>
 
             {/* Bottom accent line */}
             <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500/40 via-amber-500/40 to-slate-500/40" />
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </Portal>
   )
 }
 

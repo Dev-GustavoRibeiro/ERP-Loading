@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { createClient } from '@/shared/lib/supabase/client';
+import { createLegacyTenantClient as createClient } from '@/shared/lib/supabase/client';
 import { useSupabaseAuth } from './useSupabaseAuth';
 
 export interface MediaUploadResult {

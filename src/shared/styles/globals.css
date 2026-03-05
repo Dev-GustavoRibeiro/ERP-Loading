@@ -29,7 +29,7 @@
   --color-zed-blue-800: oklch(0.33 0.12 250);
   --color-zed-blue-900: oklch(0.27 0.09 250);
   --color-zed-blue-950: oklch(0.18 0.06 250);
-  
+
   /* ZED Color Palette - Gold */
   --color-zed-gold-50: oklch(0.98 0.03 85);
   --color-zed-gold-100: oklch(0.95 0.06 85);
@@ -42,7 +42,7 @@
   --color-zed-gold-800: oklch(0.42 0.11 85);
   --color-zed-gold-900: oklch(0.35 0.08 85);
   --color-zed-gold-950: oklch(0.25 0.05 85);
-  
+
   /* ZED Color Palette - Silver */
   --color-zed-silver-50: oklch(0.98 0.005 250);
   --color-zed-silver-100: oklch(0.95 0.008 250);
@@ -67,46 +67,87 @@
 
   /* Keyframes */
   @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
   }
 
   @keyframes pulse-glow {
-    0%, 100% {
+
+    0%,
+    100% {
       box-shadow: 0 0 20px oklch(0.55 0.20 250 / 0.4),
-                  0 0 40px oklch(0.55 0.20 250 / 0.2),
-                  0 0 60px oklch(0.55 0.20 250 / 0.1);
+        0 0 40px oklch(0.55 0.20 250 / 0.2),
+        0 0 60px oklch(0.55 0.20 250 / 0.1);
     }
+
     50% {
       box-shadow: 0 0 30px oklch(0.55 0.20 250 / 0.6),
-                  0 0 60px oklch(0.55 0.20 250 / 0.4),
-                  0 0 90px oklch(0.55 0.20 250 / 0.2);
+        0 0 60px oklch(0.55 0.20 250 / 0.4),
+        0 0 90px oklch(0.55 0.20 250 / 0.2);
     }
   }
 
   @keyframes rotate-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes scan-line {
-    0% { top: -10%; }
-    100% { top: 110%; }
+    0% {
+      top: -10%;
+    }
+
+    100% {
+      top: 110%;
+    }
   }
 
   @keyframes gradient-x {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
   }
 
   @keyframes breathe {
-    0%, 100% { opacity: 0.5; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.05); }
+
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
   }
 }
 
@@ -141,6 +182,26 @@
 
   html {
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.55 0.20 250 / 0.4) transparent;
+  }
+
+  html::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: oklch(0.55 0.20 250 / 0.4);
+    border-radius: 4px;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.55 0.20 250 / 0.6);
   }
 
   body {
@@ -148,13 +209,14 @@
     color: hsl(210 40% 98%);
     font-family: var(--font-sans);
     min-height: 100vh;
-    min-height: -webkit-fill-available; /* iOS Safari */
+    min-height: -webkit-fill-available;
+    /* iOS Safari */
     max-width: 100vw;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   /* PWA specific styles */
   @media (display-mode: standalone) {
     body {
@@ -164,7 +226,7 @@
       -webkit-touch-callout: none;
       -webkit-overflow-scrolling: touch;
     }
-    
+
     /* Prevenir zoom em double-tap em modo standalone */
     * {
       touch-action: manipulation;
@@ -175,6 +237,62 @@
     background: oklch(0.55 0.20 250 / 0.3);
     color: hsl(210 40% 98%);
   }
+
+  /* Input number — esconder spinners (setas up/down) */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  /* Input date — tema escuro no date picker nativo */
+  input[type='date'],
+  input[type='datetime-local'],
+  input[type='time'] {
+    color-scheme: dark;
+  }
+
+  input[type='date']::-webkit-calendar-picker-indicator,
+  input[type='datetime-local']::-webkit-calendar-picker-indicator,
+  input[type='time']::-webkit-calendar-picker-indicator {
+    filter: invert(0.7) sepia(1) saturate(3) hue-rotate(190deg);
+    opacity: 0.8;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  input[type='date']:hover::-webkit-calendar-picker-indicator,
+  input[type='datetime-local']:hover::-webkit-calendar-picker-indicator,
+  input[type='time']:hover::-webkit-calendar-picker-indicator {
+    opacity: 1;
+  }
+
+  /* Select nativo global — tema escuro */
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.625rem center;
+    background-size: 1rem;
+    padding-right: 2.25rem !important;
+    cursor: pointer;
+  }
+
+  select option {
+    background: #1a1f2e;
+    color: hsl(210 40% 98%);
+    padding: 0.5rem 0.75rem;
+  }
+
+  select:focus {
+    outline: none;
+  }
 }
 
 /* ========================================
@@ -182,6 +300,7 @@
    ======================================== */
 
 @layer components {
+
   /* Glassmorphism */
   .glass {
     background: hsla(222, 47%, 8%, 0.8);
@@ -200,36 +319,34 @@
   /* ZED Glow Effects */
   .zed-glow-blue {
     box-shadow: 0 0 20px oklch(0.55 0.20 250 / 0.3),
-                0 0 40px oklch(0.55 0.20 250 / 0.1);
+      0 0 40px oklch(0.55 0.20 250 / 0.1);
   }
 
   .zed-glow-gold {
     box-shadow: 0 0 20px oklch(0.72 0.18 85 / 0.3),
-                0 0 40px oklch(0.72 0.18 85 / 0.1);
+      0 0 40px oklch(0.72 0.18 85 / 0.1);
   }
 
   .zed-glow-silver {
     box-shadow: 0 0 20px oklch(0.70 0.02 250 / 0.3),
-                0 0 40px oklch(0.70 0.02 250 / 0.1);
+      0 0 40px oklch(0.70 0.02 250 / 0.1);
   }
 
   /* Gradients */
   .gradient-zed-primary {
-    background: linear-gradient(135deg, 
-      oklch(0.55 0.20 250 / 0.2) 0%, 
-      oklch(0.48 0.18 250 / 0.1) 100%
-    );
+    background: linear-gradient(135deg,
+        oklch(0.55 0.20 250 / 0.2) 0%,
+        oklch(0.48 0.18 250 / 0.1) 100%);
   }
 
   .gradient-zed-gold {
-    background: linear-gradient(135deg, 
-      oklch(0.72 0.18 85 / 0.2) 0%, 
-      oklch(0.62 0.16 85 / 0.1) 100%
-    );
+    background: linear-gradient(135deg,
+        oklch(0.72 0.18 85 / 0.2) 0%,
+        oklch(0.62 0.16 85 / 0.1) 100%);
   }
 
   .gradient-zed-mesh {
-    background: 
+    background:
       radial-gradient(at 0% 0%, oklch(0.55 0.20 250 / 0.15) 0, transparent 50%),
       radial-gradient(at 100% 0%, oklch(0.72 0.18 85 / 0.1) 0, transparent 50%),
       radial-gradient(at 100% 100%, oklch(0.70 0.02 250 / 0.1) 0, transparent 50%),
@@ -238,22 +355,20 @@
 
   /* Text Gradients */
   .text-gradient-zed {
-    background: linear-gradient(135deg, 
-      oklch(0.76 0.12 250) 0%, 
-      oklch(0.90 0.01 250) 50%, 
-      oklch(0.78 0.18 85) 100%
-    );
+    background: linear-gradient(135deg,
+        oklch(0.76 0.12 250) 0%,
+        oklch(0.90 0.01 250) 50%,
+        oklch(0.78 0.18 85) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-gold {
-    background: linear-gradient(135deg, 
-      oklch(0.78 0.18 85) 0%, 
-      oklch(0.72 0.18 85) 50%, 
-      oklch(0.62 0.16 85) 100%
-    );
+    background: linear-gradient(135deg,
+        oklch(0.78 0.18 85) 0%,
+        oklch(0.72 0.18 85) 50%,
+        oklch(0.62 0.16 85) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -261,7 +376,7 @@
 
   /* Pattern Backgrounds */
   .pattern-grid {
-    background-image: 
+    background-image:
       linear-gradient(oklch(0.55 0.20 250 / 0.03) 1px, transparent 1px),
       linear-gradient(90deg, oklch(0.55 0.20 250 / 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
@@ -271,6 +386,218 @@
     background-image: radial-gradient(oklch(0.55 0.20 250 / 0.1) 1px, transparent 1px);
     background-size: 20px 20px;
   }
+
+  /* DatePicker ZED Theme (react-day-picker) */
+  .rdp-zed .rdp-root {
+    --rdp-accent-color: oklch(0.66 0.16 250);
+    --rdp-accent-background-color: oklch(0.55 0.20 250 / 0.35);
+    --rdp-background-color: oklch(0.55 0.20 250 / 0.2);
+    --rdp-today-color: oklch(0.72 0.18 85);
+    --rdp-today-background-color: oklch(0.72 0.18 85 / 0.2);
+    --rdp-outside-opacity: 0.35;
+    --rdp-selected-border: 2px solid oklch(0.72 0.18 85);
+    --rdp-accent-opacity: 1;
+    color: hsl(210 40% 98%);
+    font-size: 0.8125rem;
+  }
+
+  .rdp-zed .rdp-months {
+    gap: 0.5rem;
+  }
+
+  .rdp-zed .rdp-month {
+    padding: 0.25rem;
+  }
+
+  .rdp-zed .rdp-month_caption {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: hsl(210 40% 95%);
+    margin-bottom: 0.75rem;
+    padding: 0 0.25rem;
+  }
+
+  .rdp-zed .rdp-weekday {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: hsl(215 20% 55%);
+    padding: 0.25rem 0;
+  }
+
+  .rdp-zed .rdp-day {
+    padding: 0.125rem;
+  }
+
+  .rdp-zed .rdp-day_button {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.15s, color 0.15s, box-shadow 0.15s;
+  }
+
+  .rdp-zed .rdp-day_button:hover:not([disabled]):not(.rdp-selected) {
+    background: oklch(0.55 0.20 250 / 0.25);
+  }
+
+  .rdp-zed .rdp-day_button.rdp-selected {
+    background: oklch(0.55 0.20 250) !important;
+    color: white !important;
+  }
+
+  .rdp-zed .rdp-day_today:not(.rdp-day_outside):not(.rdp-selected) .rdp-day_button {
+    background: oklch(0.72 0.18 85 / 0.25);
+  }
+
+  .rdp-zed .rdp-day_today.rdp-selected .rdp-day_button {
+    background: linear-gradient(135deg, oklch(0.55 0.20 250), oklch(0.48 0.18 250)) !important;
+    box-shadow: 0 0 12px oklch(0.55 0.20 250 / 0.4);
+  }
+
+  .rdp-zed .rdp-chevron {
+    fill: oklch(0.66 0.16 250);
+  }
+
+  .rdp-zed .rdp-button_next,
+  .rdp-zed .rdp-button_previous {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.15s, color 0.15s;
+  }
+
+  .rdp-zed .rdp-button_next:hover,
+  .rdp-zed .rdp-button_previous:hover {
+    background: oklch(0.55 0.20 250 / 0.2);
+    color: oklch(0.66 0.16 250);
+  }
+
+  .rdp-zed .rdp-nav {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .rdp-zed .rdp-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.25rem;
+  }
+
+  /* Select personalizado premium - todo o projeto */
+  .select-zed,
+  select.select-zed {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.25rem;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .select-zed:hover {
+    border-color: oklch(0.55 0.20 250 / 0.3);
+  }
+
+  .select-zed:focus {
+    border-color: oklch(0.55 0.20 250 / 0.5);
+    box-shadow: 0 0 0 2px oklch(0.55 0.20 250 / 0.1);
+  }
+
+  .select-zed option {
+    background: #1a1f2e;
+    color: hsl(210 40% 98%);
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* ========================================
+   FORM CONTROLS — Dark Theme Premium
+   ======================================== */
+
+/* Select & Date Input — Focus ring consistent */
+select:focus,
+input[type='date']:focus,
+input[type='datetime-local']:focus,
+input[type='time']:focus {
+  border-color: oklch(0.55 0.20 250 / 0.5) !important;
+  box-shadow: 0 0 0 2px oklch(0.55 0.20 250 / 0.1);
+  outline: none;
+}
+
+/* Select & Date Input — Hover glow */
+select:hover,
+input[type='date']:hover,
+input[type='datetime-local']:hover,
+input[type='time']:hover {
+  border-color: oklch(0.55 0.20 250 / 0.25);
+}
+
+/* Date input — placeholder when empty */
+input[type='date']:not(:valid):not(:focus) {
+  color: hsl(215 20% 45%);
+}
+
+/* Date input — improved styling */
+input[type='date'],
+input[type='datetime-local'],
+input[type='time'] {
+  position: relative;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+/* Select — transition */
+select {
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+/* ========================================
+   SCROLLBAR PERSONALIZAÇÃO
+   ======================================== */
+
+/* Scrollbar padrão do projeto (zed theme) */
+.scrollbar-zed {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.55 0.20 250 / 0.4) transparent;
+}
+
+.scrollbar-zed::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-zed::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-zed::-webkit-scrollbar-thumb {
+  background: oklch(0.55 0.20 250 / 0.4);
+  border-radius: 4px;
+}
+
+.scrollbar-zed::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.55 0.20 250 / 0.6);
+}
+
+.scrollbar-zed::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Scrollbar invisível (modais, dropdowns, etc) */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
 
 /* ========================================
@@ -278,38 +605,6 @@
    ======================================== */
 
 @layer utilities {
-  /* Scrollbar */
-  .scrollbar-none {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .scrollbar-none::-webkit-scrollbar {
-    display: none;
-  }
-
-  .scrollbar-zed {
-    scrollbar-width: thin;
-    scrollbar-color: oklch(0.55 0.20 250 / 0.3) transparent;
-  }
-
-  .scrollbar-zed::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  .scrollbar-zed::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .scrollbar-zed::-webkit-scrollbar-thumb {
-    background: oklch(0.55 0.20 250 / 0.3);
-    border-radius: 3px;
-  }
-
-  .scrollbar-zed::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.55 0.20 250 / 0.5);
-  }
 
   /* Transform GPU */
   .transform-gpu {
@@ -326,13 +621,11 @@
     content: '';
     position: absolute;
     inset: -2px;
-    background: linear-gradient(
-      135deg,
-      oklch(0.55 0.20 250 / 0.5),
-      oklch(0.72 0.18 85 / 0.5),
-      oklch(0.70 0.02 250 / 0.5),
-      oklch(0.55 0.20 250 / 0.5)
-    );
+    background: linear-gradient(135deg,
+        oklch(0.55 0.20 250 / 0.5),
+        oklch(0.72 0.18 85 / 0.5),
+        oklch(0.70 0.02 250 / 0.5),
+        oklch(0.55 0.20 250 / 0.5));
     background-size: 300% 300%;
     animation: gradient-x 3s ease infinite;
     border-radius: inherit;
@@ -347,9 +640,12 @@
 
   /* Animated Gradient */
   @keyframes gradient {
-    0%, 100% {
+
+    0%,
+    100% {
       background-position: 0% 50%;
     }
+
     50% {
       background-position: 100% 50%;
     }
@@ -359,31 +655,32 @@
     animation: gradient 3s ease infinite;
     background-size: 200% 200%;
   }
-  
+
   /* Safe Area Support for PWA */
   .safe-area-top {
     padding-top: env(safe-area-inset-top);
   }
-  
+
   .safe-area-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }
-  
+
   .safe-area-left {
     padding-left: env(safe-area-inset-left);
   }
-  
+
   .safe-area-right {
     padding-right: env(safe-area-inset-right);
   }
-  
+
   /* Mobile PWA optimizations */
   @media (display-mode: standalone) {
+
     /* Prevenir zoom em double-tap */
     * {
       touch-action: manipulation;
     }
-    
+
     /* Melhorar performance de scroll */
     body {
       -webkit-overflow-scrolling: touch;

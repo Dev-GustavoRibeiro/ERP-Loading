@@ -1,35 +1,47 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { createClient } from '@/shared/lib/supabase/client';
+import { createAdminBrowserClient } from '@/shared/lib/supabase/admin.browser';
 import toast from 'react-hot-toast';
 import type { SupabaseClient } from '@supabase/supabase-js';
+
+// =====================================================
+// Tipos
+// =====================================================
 
 export interface UserProfile {
   id: string;
   email: string;
   name: string;
   avatar_url: string | null;
+  role: string;
   subscription_tier: string;
+  settings: Record<string, any>;
   created_at: string;
   updated_at: string;
 }
 
+// =====================================================
+// Hook de Perfil do Usuário
+// =====================================================
+
 /**
- * Hook para gerenciar o perfil do usuário
+ * Hook para gerenciar o perfil do usuário.
+ *
+ * Lê e escreve na tabela `profiles` do ADMIN Supabase.
+ * NUNCA acessa o banco do ERP/tenant.
  */
 export const useUserProfile = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
-  // Usar client sem tipagem estrita para evitar problemas com tipos gerados
-  const supabase = createClient() as unknown as SupabaseClient;
+  const supabase = createAdminBrowserClient() as unknown as SupabaseClient;
 
-  // Carregar perfil do usuário
+  // Carregar perfil do ADMIN
   const loadProfile = useCallback(async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      
+
       if (!user) {
         setProfile(null);
         setIsLoading(false);
@@ -43,7 +55,7 @@ export const useUserProfile = () => {
         .single();
 
       if (error) {
-        console.error('Erro ao carregar perfil:', error);
+        console.error('Erro ao carregar perfil:', JSON.stringify(error, null, 2));
         setProfile(null);
       } else {
         setProfile(data);
@@ -58,7 +70,6 @@ export const useUserProfile = () => {
   useEffect(() => {
     loadProfile();
 
-    // Escutar mudanças de autenticação
     const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
       loadProfile();
     });
@@ -66,21 +77,19 @@ export const useUserProfile = () => {
     return () => subscription.unsubscribe();
   }, [loadProfile, supabase.auth]);
 
-  // Upload de foto de perfil
+  // Upload de foto de perfil (no ADMIN storage)
   const uploadAvatar = useCallback(async (file: File): Promise<boolean> => {
     if (!profile) {
       toast.error('Usuário não autenticado');
       return false;
     }
 
-    // Validar tipo de arquivo
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
     if (!allowedTypes.includes(file.type)) {
       toast.error('Formato não suportado. Use JPG, PNG, WebP ou GIF.');
       return false;
     }
 
-    // Validar tamanho (máx 5MB)
     const maxSize = 5 * 1024 * 1024;
     if (file.size > maxSize) {
       toast.error('Imagem muito grande. Máximo 5MB.');
@@ -90,12 +99,10 @@ export const useUserProfile = () => {
     setIsUploading(true);
 
     try {
-      // Gerar nome único para o arquivo
       const fileExt = file.name.split('.').pop();
       const fileName = `${profile.id}-${Date.now()}.${fileExt}`;
       const filePath = `avatars/${fileName}`;
 
-      // Fazer upload para o Supabase Storage
       const { error: uploadError } = await supabase.storage
         .from('public-assets')
         .upload(filePath, file, {
@@ -109,12 +116,10 @@ export const useUserProfile = () => {
         return false;
       }
 
-      // Obter URL pública
       const { data: { publicUrl } } = supabase.storage
         .from('public-assets')
         .getPublicUrl(filePath);
 
-      // Atualizar perfil com a nova URL
       const { error: updateError } = await supabase
         .from('profiles')
         .update({ avatar_url: publicUrl })
@@ -126,7 +131,6 @@ export const useUserProfile = () => {
         return false;
       }
 
-      // Atualizar estado local
       setProfile(prev => prev ? { ...prev, avatar_url: publicUrl } : null);
       toast.success('Foto atualizada com sucesso!');
       return true;
@@ -139,7 +143,7 @@ export const useUserProfile = () => {
     }
   }, [profile, supabase]);
 
-  // Remover foto de perfil
+  // Remover foto
   const removeAvatar = useCallback(async (): Promise<boolean> => {
     if (!profile) {
       toast.error('Usuário não autenticado');
@@ -168,7 +172,7 @@ export const useUserProfile = () => {
     }
   }, [profile, supabase]);
 
-  // Atualizar nome do perfil
+  // Atualizar nome
   const updateName = useCallback(async (name: string): Promise<boolean> => {
     if (!profile) {
       toast.error('Usuário não autenticado');
@@ -207,4 +211,3 @@ export const useUserProfile = () => {
     refreshProfile: loadProfile,
   };
 };
-

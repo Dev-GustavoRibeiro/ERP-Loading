@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Bell, X, ChevronLeft, Menu, Camera, LogOut, User, Settings } from 'lucide-react';
+import { Search, Bell, X, ChevronLeft, Menu, Camera, LogOut, User } from 'lucide-react';
 import { HeaderProps, SearchOption } from '@/shared/types';
 import { cn, focusRings } from '@/shared/lib';
 import { Button, Input, Avatar, Typography } from '@/shared/components/atoms';
@@ -21,37 +21,37 @@ const BREAKPOINTS = {
 };
 
 /**
- * Hook para detectar tamanho da tela
+ * Hook para detectar tamanho da tela (SSR-safe).
+ *
+ * IMPORTANTE: O estado inicial DEVE ser idêntico no server e no client
+ * para evitar hydration mismatch. Usamos defaults fixos ("lg" / 1024px)
+ * e atualizamos no useEffect que só roda no client.
  */
 const useResponsiveScreen = () => {
-  const [windowWidth, setWindowWidth] = React.useState(
-    typeof window !== 'undefined' ? window.innerWidth : BREAKPOINTS.lg
-  );
-  const [screenSize, setScreenSize] = React.useState(() => {
-    if (typeof window === 'undefined') return 'lg';
-    const width = window.innerWidth;
-    if (width < BREAKPOINTS.sm) return 'xs';
-    if (width < BREAKPOINTS.md) return 'sm';
-    if (width < BREAKPOINTS.lg) return 'md';
-    if (width < BREAKPOINTS.xl) return 'lg';
-    if (width < BREAKPOINTS.xxl) return 'xl';
-    return 'xxl';
-  });
+  // Defaults SSR-safe — nunca ler window aqui!
+  const [windowWidth, setWindowWidth] = React.useState(BREAKPOINTS.lg);
+  const [screenSize, setScreenSize] = React.useState('lg');
+  const [isTouch, setIsTouch] = React.useState(false);
 
   React.useEffect(() => {
+    const computeSize = (width: number) => {
+      if (width < BREAKPOINTS.sm) return 'xs';
+      if (width < BREAKPOINTS.md) return 'sm';
+      if (width < BREAKPOINTS.lg) return 'md';
+      if (width < BREAKPOINTS.xl) return 'lg';
+      if (width < BREAKPOINTS.xxl) return 'xl';
+      return 'xxl';
+    };
+
     const handleResize = () => {
       const width = window.innerWidth;
       setWindowWidth(width);
-      
-      if (width < BREAKPOINTS.sm) setScreenSize('xs');
-      else if (width < BREAKPOINTS.md) setScreenSize('sm');
-      else if (width < BREAKPOINTS.lg) setScreenSize('md');
-      else if (width < BREAKPOINTS.xl) setScreenSize('lg');
-      else if (width < BREAKPOINTS.xxl) setScreenSize('xl');
-      else setScreenSize('xxl');
+      setScreenSize(computeSize(width));
     };
 
-    handleResize(); 
+    handleResize();
+    setIsTouch('ontouchstart' in window);
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -61,7 +61,7 @@ const useResponsiveScreen = () => {
     windowWidth, 
     isMobile: windowWidth < BREAKPOINTS.md,
     isSmallMobile: windowWidth <= 375,
-    isTouch: typeof window !== 'undefined' && 'ontouchstart' in window
+    isTouch,
   };
 };
 
@@ -689,22 +689,6 @@ export const Header = ({
                         <span className={cn(isSmallMobile ? 'text-xs' : 'text-sm')}>
                           {profile?.avatar_url ? 'Alterar foto' : 'Adicionar foto'}
                         </span>
-                      </button>
-
-                      <button
-                        onClick={() => {
-                          setShowProfileMenu(false);
-                          router.push('/dashboard/settings');
-                        }}
-                        className={cn(
-                          'w-full flex items-center gap-3 px-4 py-2.5 text-left',
-                          'text-[#9CA3AF] hover:text-white',
-                          'hover:bg-gradient-to-r hover:from-[#424959]/40 hover:to-[#1e293b]/30',
-                          'transition-all duration-150'
-                        )}
-                      >
-                        <Settings size={18} className="text-purple-400" />
-                        <span className={cn(isSmallMobile ? 'text-xs' : 'text-sm')}>Configurações</span>
                       </button>
                     </div>
 

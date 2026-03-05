@@ -1,26 +1,17 @@
 {
-  "name": "ZED - Assistente Virtual Inteligente",
-  "short_name": "ZED",
-  "description": "ZED é seu assistente virtual pessoal com IA avançada. Organize sua vida, rotina, finanças e agenda com inteligência artificial.",
-  "start_url": "/",
+  "name": "ERP Loading - Sistema de Gestao Empresarial",
+  "short_name": "ERP Loading",
+  "description": "Sistema de gestao empresarial modular para pequenas e medias empresas. Gerencie vendas, financeiro, estoque, fiscal, OS e muito mais em uma unica plataforma.",
+  "start_url": "/dashboard",
   "display": "standalone",
   "background_color": "#0A101F",
   "theme_color": "#1E293B",
   "orientation": "portrait-primary",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "scope": "/",
   "icons": [
     {
-      "src": "/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
       "src": "/logo.png",
       "sizes": "192x192",
       "type": "image/png",
@@ -43,25 +34,44 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/icon-zed.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
-  "categories": ["productivity", "utilities", "lifestyle"],
+  "categories": ["business", "productivity", "finance"],
   "screenshots": [],
   "shortcuts": [
     {
-      "name": "Chat com ZED",
-      "short_name": "Chat",
-      "description": "Converse com seu assistente virtual",
-      "url": "/dashboard/chat",
+      "name": "Dashboard",
+      "short_name": "Inicio",
+      "description": "Painel principal com KPIs e alertas",
+      "url": "/dashboard",
       "icons": [{ "src": "/logo.png", "sizes": "96x96" }]
     },
     {
-      "name": "Dashboard",
-      "short_name": "Home",
-      "description": "Acesse seu dashboard",
-      "url": "/dashboard",
+      "name": "Ponto de Venda",
+      "short_name": "PDV",
+      "description": "Abrir frente de caixa",
+      "url": "/dashboard/pdv",
+      "icons": [{ "src": "/logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Vendas",
+      "short_name": "Vendas",
+      "description": "Gerenciar pedidos e orcamentos",
+      "url": "/dashboard/vendas",
+      "icons": [{ "src": "/logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Financeiro",
+      "short_name": "Financeiro",
+      "description": "Contas a pagar e receber",
+      "url": "/dashboard/financeiro",
       "icons": [{ "src": "/logo.png", "sizes": "96x96" }]
     }
   ]
 }
-
