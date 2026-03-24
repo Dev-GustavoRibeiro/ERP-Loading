@@ -912,36 +912,54 @@ export const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
         style={scrollbarHideStyles}
       >
         <nav className={cn(spacing.containerPadding)}>
-          <ul className={cn("space-y-4", spacing.menuPadding)}>
-            {filteredMenuItems.map((section) => (
-              <li key={section.section} className={cn(spacing.sectionMargin)}>
-                <AnimatePresence mode="wait">
-                  {isOpen && (
-                    <motion.h3
-                      key="section-header"
-                      variants={itemVariants}
-                      initial="closed"
-                      animate="open"
-                      exit="closed"
-                      className={cn(
-                        'ml-1 tracking-wider uppercase font-semibold',
-                        'bg-clip-text text-transparent bg-gradient-to-r',
-                        'from-blue-400/90 via-purple-400/80 to-green-400/90',
-                        isSmallMobile ? 'text-[10px] mb-1' :
-                          screenSize === 'xs' ? 'text-xs mb-1' :
-                            'text-xs mb-1.5'
-                      )}
-                    >
-                      {section.section}
-                    </motion.h3>
-                  )}
-                </AnimatePresence>
-                <ul className={cn(spacing.itemSpacing)}>
-                  {section.items && section.items.length > 0 ? section.items.map((item) => renderNavItem(item)) : null}
-                </ul>
-              </li>
-            ))}
-          </ul>
+          {isLoadingModules ? (
+            <ul className={cn("space-y-4", spacing.menuPadding)}>
+              {[1, 2, 3, 4, 5].map((i) => (
+                <li key={i} className="animate-pulse">
+                  <div className={cn(
+                    'flex items-center gap-3 rounded-xl',
+                    spacing.itemPadding,
+                    'bg-white/5'
+                  )}>
+                    <div className="rounded-full bg-white/10 flex-shrink-0"
+                      style={{ width: iconSize, height: iconSize }} />
+                    {isOpen && <div className="h-3 w-20 bg-white/10 rounded" />}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className={cn("space-y-4", spacing.menuPadding)}>
+              {filteredMenuItems.map((section) => (
+                <li key={section.section} className={cn(spacing.sectionMargin)}>
+                  <AnimatePresence mode="wait">
+                    {isOpen && (
+                      <motion.h3
+                        key="section-header"
+                        variants={itemVariants}
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
+                        className={cn(
+                          'ml-1 tracking-wider uppercase font-semibold',
+                          'bg-clip-text text-transparent bg-gradient-to-r',
+                          'from-blue-400/90 via-purple-400/80 to-green-400/90',
+                          isSmallMobile ? 'text-[10px] mb-1' :
+                            screenSize === 'xs' ? 'text-xs mb-1' :
+                              'text-xs mb-1.5'
+                        )}
+                      >
+                        {section.section}
+                      </motion.h3>
+                    )}
+                  </AnimatePresence>
+                  <ul className={cn(spacing.itemSpacing)}>
+                    {section.items && section.items.length > 0 ? section.items.map((item) => renderNavItem(item)) : null}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          )}
         </nav>
       </div>
 

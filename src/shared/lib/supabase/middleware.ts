@@ -11,6 +11,18 @@ import { resolveTenantFromRequest, TENANT_COOKIE } from '@/shared/lib/tenant/res
  * 3. Resolução do tenant (subdomínio/cookie) e set do cookie x-tenant-slug
  */
 export async function updateSession(request: NextRequest) {
+  const path = request.nextUrl.pathname;
+
+  // 1. Rotas estáticas e de API — passar direto (evita chamadas desnecessárias ao Auth)
+  if (
+    path.startsWith('/_next') ||
+    path.startsWith('/static') ||
+    path.startsWith('/api') ||
+    path.includes('.')
+  ) {
+    return NextResponse.next({ request });
+  }
+
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -36,18 +48,6 @@ export async function updateSession(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
-  const path = request.nextUrl.pathname;
-
-  // 1. Rotas estáticas e de API — passar direto
-  if (
-    path.startsWith('/_next') ||
-    path.startsWith('/static') ||
-    path.startsWith('/api') ||
-    path.includes('.')
-  ) {
-    return supabaseResponse;
-  }
 
   // 2. Rotas públicas
   const publicRoutes = ['/login', '/signup', '/forgot-password', '/reset-password', '/auth'];

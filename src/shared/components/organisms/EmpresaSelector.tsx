@@ -11,6 +11,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { getMinhasEmpresas } from '@/app/actions/empresas';
 import type { Empresa } from '@/modules/core/domain';
+import { setEmpresaId } from '@/shared/hooks/useEmpresaId';
 import { cn } from '@/shared/lib/utils';
 
 const GENERAL_OVERVIEW_ID = 'general-overview';
@@ -52,13 +53,13 @@ export const EmpresaSelector: React.FC<EmpresaSelectorProps> = ({ isOpen, onEmpr
         } else if (empresasData.length > 0) {
           setSelectedEmpresa(empresasData[0]);
           setIsGeneralOverview(false);
-          localStorage.setItem('empresa_id', empresasData[0].id);
+          setEmpresaId(empresasData[0].id);
           onEmpresaChange?.(empresasData[0].id);
         }
       } else if (empresasData.length > 0) {
         setSelectedEmpresa(empresasData[0]);
         setIsGeneralOverview(false);
-        localStorage.setItem('empresa_id', empresasData[0].id);
+        setEmpresaId(empresasData[0].id);
         onEmpresaChange?.(empresasData[0].id);
       }
     } catch (error) {
@@ -75,7 +76,7 @@ export const EmpresaSelector: React.FC<EmpresaSelectorProps> = ({ isOpen, onEmpr
   const handleSelect = (empresa: Empresa) => {
     setSelectedEmpresa(empresa);
     setIsGeneralOverview(false);
-    localStorage.setItem('empresa_id', empresa.id);
+    setEmpresaId(empresa.id);
     onEmpresaChange?.(empresa.id);
     setDropdownOpen(false);
     window.location.reload();
@@ -84,7 +85,7 @@ export const EmpresaSelector: React.FC<EmpresaSelectorProps> = ({ isOpen, onEmpr
   const handleSelectOverview = () => {
     setSelectedEmpresa(null);
     setIsGeneralOverview(true);
-    localStorage.setItem('empresa_id', GENERAL_OVERVIEW_ID);
+    setEmpresaId(GENERAL_OVERVIEW_ID);
     onEmpresaChange?.(GENERAL_OVERVIEW_ID);
     setDropdownOpen(false);
     window.location.reload();

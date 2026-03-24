@@ -13,6 +13,8 @@ import {
   Route,
   ScanBarcode,
   DollarSign,
+  BoxesIcon,
+  Plus,
 } from 'lucide-react';
 import { PageTemplate, StatCardData, ModuleCardData, ActionButtonData } from '@/shared/components/templates';
 import { useEmpresaId } from '@/shared/hooks/useEmpresaId';
@@ -30,13 +32,14 @@ import { WarehousesModal } from '@/modules/inventario/components/warehouses/Ware
 import { RulesModal } from '@/modules/inventario/components/rules/RulesModal';
 import { TraceabilityModal } from '@/modules/inventario/components/traceability/TraceabilityModal';
 import { ValuationModal } from '@/modules/inventario/components/valuation/ValuationModal';
+import { ProductsModal } from '@/modules/inventario/components/products/ProductsModal';
 
 // =====================================================
 // Page Component
 // =====================================================
 
 type ModalType =
-  | 'stock' | 'movements' | 'operations' | 'counts'
+  | 'products' | 'stock' | 'movements' | 'operations' | 'counts'
   | 'adjustments' | 'scrap' | 'replenishment'
   | 'warehouses' | 'rules' | 'traceability' | 'valuation'
   | null;
@@ -73,11 +76,13 @@ export default function InventarioPage() {
   useEffect(() => { loadStats(); }, [loadStats]);
 
   const actionButtons: ActionButtonData[] = [
-    { icon: Truck, label: 'Nova Operação', variant: 'primary', onClick: () => setActiveModal('operations') },
+    { icon: Plus, label: 'Novo Produto', variant: 'primary', onClick: () => setActiveModal('products') },
+    { icon: Truck, label: 'Nova Operação', variant: 'secondary', onClick: () => setActiveModal('operations') },
     { icon: Wrench, label: 'Ajuste Rápido', variant: 'secondary', onClick: () => setActiveModal('adjustments') },
   ];
 
   const modules: ModuleCardData[] = [
+    { icon: BoxesIcon, label: 'Produtos', description: 'Cadastro de produtos com geração de SKU, QR Code e código de barras. Visualize e gerencie o catálogo completo.', color: 'violet', onClick: () => setActiveModal('products') },
     { icon: Package, label: 'Estoque', description: 'Visão de saldos por produto, depósito e localização com filtros avançados.', color: 'violet', onClick: () => setActiveModal('stock') },
     { icon: ArrowRightLeft, label: 'Movimentações', description: 'Ledger completo de entradas, saídas, transferências e ajustes.', color: 'blue', onClick: () => setActiveModal('movements') },
     { icon: Truck, label: 'Operações', description: 'Recebimentos, expedições e transferências internas com fluxo multi-step.', color: 'emerald', onClick: () => setActiveModal('operations') },
@@ -109,6 +114,7 @@ export default function InventarioPage() {
       />
 
       {/* Professional Inventory Module Modals */}
+      <ProductsModal isOpen={activeModal === 'products'} onClose={closeModal} />
       <StockModal isOpen={activeModal === 'stock'} onClose={closeModal} />
       <MovementsModal isOpen={activeModal === 'movements'} onClose={closeModal} />
       <OperationsModal isOpen={activeModal === 'operations'} onClose={closeModal} />
